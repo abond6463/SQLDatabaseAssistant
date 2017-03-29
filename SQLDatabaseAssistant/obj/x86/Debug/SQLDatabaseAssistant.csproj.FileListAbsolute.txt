@@ -1,0 +1,7 @@
+D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\bin\Debug\SQLDatabaseAssistant.exe
+D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\bin\Debug\SQLDatabaseAssistant.pdb
+D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseDetacher.Form1.resources
+D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.Properties.Resources.resources
+D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.csproj.GenerateResource.Cache
+D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.exe
+D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.pdb
