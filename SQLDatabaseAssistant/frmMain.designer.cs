@@ -1,6 +1,6 @@
 ﻿namespace SQLDatabaseAssistant
 {
-    partial class Form1
+    partial class frmMain
     {
         /// <summary>
         /// Required designer variable.
@@ -169,7 +169,7 @@
             this.btnDisAutoClose.UseVisualStyleBackColor = true;
             this.btnDisAutoClose.Click += new System.EventHandler(this.btnDisAutoClose_Click);
             // 
-            // Form1
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -188,8 +188,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtInstance);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
-            this.Text = "SQL Database Detacher";
+            this.Name = "frmMain";
+            this.Text = "SQL Database Assistant";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
