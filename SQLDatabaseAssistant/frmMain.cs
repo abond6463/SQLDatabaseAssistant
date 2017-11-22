@@ -19,46 +19,20 @@ namespace SQLDatabaseAssistant
             this.InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void frmMain_Load(object sender, EventArgs e)
         {
-        }
-
-        private void backupDBs(SqlConnection conn)
-        {
-            try
-            {
-                try
-                {
-                    conn.Open();
-                    foreach (object checkedItem in this.chkLstInstanceDB.CheckedItems)
-                    {
-                        string[] text = new string[] { this.txtBkpPath.Text, checkedItem.ToString(), "_", null, null };
-                        text[3] = DateTime.Now.ToString("yyyyddMMHHmmss");
-                        text[4] = ".bak";
-                        string str = string.Concat(text);
-                        text = new string[] { "BACKUP DATABASE ", checkedItem.ToString(), " TO DISK = '", str, "'" };
-                        SqlCommand sqlCommand = new SqlCommand(string.Concat(text), conn)
-                        {
-                            CommandTimeout = 0x168
-                        };
-                        sqlCommand.ExecuteNonQuery();
-                    }
-                    MessageBox.Show("Backup complete!");
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message);
-                }
-            }
-            finally
-            {
-                conn.Close();
-            }
         }
 
         private void btnBackup_Click(object sender, EventArgs e)
         {
-            this.backupDBs(this.getSqlConnection());
+            if (chkLstInstanceDB.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Please select a database before triggering one of the functions.");
+            }
+            else
+            {
+                this.BackupDBs(this.GetSqlConnection());
+            }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -68,17 +42,31 @@ namespace SQLDatabaseAssistant
 
         private void btnDetach_Click(object sender, EventArgs e)
         {
-            this.detachDBs(this.getSqlConnection());
+            if (chkLstInstanceDB.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Please select a database before triggering one of the functions.");
+            }
+            else
+            {
+                this.DetachDBs(this.GetSqlConnection());
+            }
         }
 
         private void btnDisAutoClose_Click(object sender, EventArgs e)
         {
-            this.disableAutoClose(this.getSqlConnection());
+            if (chkLstInstanceDB.CheckedItems.Count == 0)
+            {
+                MessageBox.Show("Please select a database before triggering one of the functions.");
+            }
+            else
+            {
+                this.DisableAutoClose(this.GetSqlConnection());
+            }
         }
 
         private void btnLoadDB_Click(object sender, EventArgs e)
         {
-            SqlConnection sqlConnection = this.getSqlConnection();
+            SqlConnection sqlConnection = this.GetSqlConnection();
             try
             {
                 try
@@ -107,26 +95,80 @@ namespace SQLDatabaseAssistant
             }
         }
 
-        private void detachDBs(SqlConnection conn)
+        private void BackupDBs(SqlConnection conn)
         {
             try
             {
-                try
+                ResetProgressBar(this.chkLstInstanceDB.CheckedItems.Count);
+                conn.Open();
+                foreach (object checkedItem in this.chkLstInstanceDB.CheckedItems)
                 {
-                    conn.Open();
-                    foreach (object checkedItem in this.chkLstInstanceDB.CheckedItems)
+                    WriteLog("Backup start - " + checkedItem.ToString());
+                    try
                     {
-                        SqlCommand sqlCommand = new SqlCommand(string.Concat("alter database ", checkedItem.ToString(), " set offline with rollback immediate"), conn);
+                        string[] text = new string[] { this.txtBkpPath.Text, checkedItem.ToString(), "_", null, null };
+                        text[3] = DateTime.Now.ToString("yyyyddMMHHmmss");
+                        text[4] = ".bak";
+                        string str = string.Concat(text);
+                        text = new string[] { "BACKUP DATABASE [", checkedItem.ToString(), "] TO DISK = '", str, "'" };
+                        SqlCommand sqlCommand = new SqlCommand(string.Concat(text), conn)
+                        {
+                            CommandTimeout = 0x168
+                        };
+                        sqlCommand.ExecuteNonQuery();
+                        WriteLog("Backup Successful");
+                    }
+                    catch (Exception exception)
+                    {
+                        //MessageBox.Show(exception.Message);
+                        WriteLog("ERROR: " + exception.Message);
+                    }
+                    finally
+                    {
+                        UpdateProgressBar();
+                    }
+                }
+                //MessageBox.Show("Backup complete!");
+                WriteLog("BACKUP COMPLETE!");
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        private void DetachDBs(SqlConnection conn)
+        {
+            try
+            {
+                ResetProgressBar(this.chkLstInstanceDB.CheckedItems.Count);
+                
+                conn.Open();
+                foreach (object checkedItem in this.chkLstInstanceDB.CheckedItems)
+                {
+                    WriteLog("Detach start - " + checkedItem.ToString());
+                    try
+                    {
+                        SqlCommand sqlCommand = new SqlCommand(string.Concat("alter database [", checkedItem.ToString(), "] set offline with rollback immediate"), conn);
                         sqlCommand.ExecuteNonQuery();
                         sqlCommand = new SqlCommand(string.Concat("sp_detach_db @dbname='", checkedItem.ToString(), "'"), conn);
                         sqlCommand.ExecuteNonQuery();
+                        WriteLog("Detach Successful");
                     }
-                    MessageBox.Show("Detaching complete!");
+                    catch (Exception exception)
+                    {
+                        //MessageBox.Show(exception.Message);
+                        WriteLog("ERROR: " + exception.Message);
+                    }
+                    finally
+                    {
+                        UpdateProgressBar();
+                    }
                 }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message);
-                }
+                //MessageBox.Show("Detaching complete!");
+                WriteLog("DETACHING COMPLETE!");
+                
             }
             finally
             {
@@ -134,24 +176,30 @@ namespace SQLDatabaseAssistant
             }
         }
 
-        private void disableAutoClose(SqlConnection conn)
+        private void DisableAutoClose(SqlConnection conn)
         {
             try
             {
-                try
+                ResetProgressBar(this.chkLstInstanceDB.CheckedItems.Count);
+                conn.Open();
+                foreach (object checkedItem in this.chkLstInstanceDB.CheckedItems)
                 {
-                    conn.Open();
-                    foreach (object checkedItem in this.chkLstInstanceDB.CheckedItems)
+                    try
                     {
-                        SqlCommand sqlCommand = new SqlCommand(string.Concat("alter database ", checkedItem.ToString(), " set auto_close off"), conn);
+                        SqlCommand sqlCommand = new SqlCommand(string.Concat("alter database [", checkedItem.ToString(), "] set auto_close off"), conn);
                         sqlCommand.ExecuteNonQuery();
                     }
-                    MessageBox.Show("Disabling Auto Close Complete!");
+                    catch (Exception exception)
+                    {
+                        MessageBox.Show(exception.Message);
+                    }
+                    finally
+                    {
+                        UpdateProgressBar();
+                    }
                 }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message);
-                }
+                //MessageBox.Show("Disabling Auto Close Complete!");
+                WriteLog("DISABLE AUTO CLOSE COMPLETE!");
             }
             finally
             {
@@ -159,7 +207,23 @@ namespace SQLDatabaseAssistant
             }
         }
 
-        private SqlConnection getSqlConnection()
+        private void ResetProgressBar(int max)
+        {
+            tsProgressBar1.Maximum = max;
+            tsProgressBar1.Value = 0;
+        }
+
+        private void UpdateProgressBar()
+        {
+            tsProgressBar1.PerformStep();
+        }
+
+        private void WriteLog(string myLog)
+        {
+            txtLog.AppendText(DateTime.Now.ToString("yyyy-dd-MM HH:mm:ss") + " -- " + myLog + Environment.NewLine);
+        }
+
+        private SqlConnection GetSqlConnection()
         {
             SqlConnection sqlConnection = new SqlConnection();
             string[] text = new string[] { "Server=", this.txtInstance.Text, ";User Id=", this.txtUsername.Text, ";Password=", this.txtPassword.Text, ";" };

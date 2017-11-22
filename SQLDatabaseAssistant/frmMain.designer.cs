@@ -42,6 +42,11 @@
             this.txtBkpPath = new System.Windows.Forms.TextBox();
             this.btnBackup = new System.Windows.Forms.Button();
             this.btnDisAutoClose = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.txtLog = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -82,6 +87,7 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Size = new System.Drawing.Size(184, 20);
             this.txtPassword.TabIndex = 5;
+            this.txtPassword.UseSystemPasswordChar = true;
             // 
             // label3
             // 
@@ -169,11 +175,50 @@
             this.btnDisAutoClose.UseVisualStyleBackColor = true;
             this.btnDisAutoClose.Click += new System.EventHandler(this.btnDisAutoClose_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsProgressBar1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 470);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(456, 22);
+            this.statusStrip1.TabIndex = 22;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsProgressBar1
+            // 
+            this.tsProgressBar1.Maximum = 10;
+            this.tsProgressBar1.Name = "tsProgressBar1";
+            this.tsProgressBar1.Size = new System.Drawing.Size(100, 16);
+            this.tsProgressBar1.Step = 1;
+            // 
+            // txtLog
+            // 
+            this.txtLog.Location = new System.Drawing.Point(15, 350);
+            this.txtLog.Multiline = true;
+            this.txtLog.Name = "txtLog";
+            this.txtLog.ReadOnly = true;
+            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtLog.Size = new System.Drawing.Size(423, 117);
+            this.txtLog.TabIndex = 23;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 334);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(28, 13);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Log:";
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(448, 367);
+            this.ClientSize = new System.Drawing.Size(456, 492);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtLog);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnDisAutoClose);
             this.Controls.Add(this.btnBackup);
             this.Controls.Add(this.txtBkpPath);
@@ -190,7 +235,9 @@
             this.Controls.Add(this.label1);
             this.Name = "frmMain";
             this.Text = "SQL Database Assistant";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.frmMain_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,6 +259,10 @@
         private System.Windows.Forms.TextBox txtBkpPath;
         private System.Windows.Forms.Button btnBackup;
         private System.Windows.Forms.Button btnDisAutoClose;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripProgressBar tsProgressBar1;
+        private System.Windows.Forms.TextBox txtLog;
+        private System.Windows.Forms.Label label5;
     }
 }
 
