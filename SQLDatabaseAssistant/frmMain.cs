@@ -101,21 +101,41 @@ namespace SQLDatabaseAssistant
             {
                 ResetProgressBar(this.chkLstInstanceDB.CheckedItems.Count);
                 conn.Open();
-                foreach (object checkedItem in this.chkLstInstanceDB.CheckedItems)
+                foreach (object DB in this.chkLstInstanceDB.CheckedItems)
                 {
-                    WriteLog("Backup start - " + checkedItem.ToString());
+                    WriteLog("Backup start - " + DB.ToString());
                     try
                     {
-                        string[] text = new string[] { this.txtBkpPath.Text, checkedItem.ToString(), "_", null, null };
-                        text[3] = DateTime.Now.ToString("yyyyddMMHHmmss");
-                        text[4] = ".bak";
-                        string str = string.Concat(text);
-                        text = new string[] { "BACKUP DATABASE [", checkedItem.ToString(), "] TO DISK = '", str, "'" };
-                        SqlCommand sqlCommand = new SqlCommand(string.Concat(text), conn)
+                        //string[] text = new string[] { this.txtBkpPath.Text, checkedItem.ToString(), "_", null, null };
+                        //text[3] = DateTime.Now.ToString("yyyyddMMHHmmss");
+                        //text[4] = ".bak";
+                        //string str = string.Concat(text);
+                        //text = new string[] { "BACKUP DATABASE [", DB.ToString(), "] TO DISK = '", str, "'" };
+                        // SqlCommand sqlCommand = new SqlCommand(string.Concat(text), conn)
+                        //{
+                        //    CommandTimeout = 0x168
+                        // };
+                        //sqlCommand.ExecuteNonQuery();
+
+                        //Generate filename
+                        string filename;
+                        if(txtBkpPath.Text.Substring(txtBkpPath.Text.Length-1, 1) != @"\")
                         {
-                            CommandTimeout = 0x168
+                            filename = txtBkpPath.Text + @"\" + DB.ToString() + @"_" + DateTime.Now.ToString("yyyyddMMHHmmss") + @".bak";
+                        }
+                        else
+                        {
+                            filename = txtBkpPath.Text + DB.ToString() + @"_" + DateTime.Now.ToString("yyyyddMMHHmmss") + @".bak";
+                        }
+                        MessageBox.Show(filename);
+                        //Instantiate a SQL Command with an INSERT query
+                        SqlCommand comm = new SqlCommand("BACKUP DATABASE [" + DB.ToString() + "] TO DISK = '" + filename + "'", conn)
+                        {
+                            CommandTimeout = 360
                         };
-                        sqlCommand.ExecuteNonQuery();
+                        //Execute the query
+                        comm.ExecuteNonQuery();
+
                         WriteLog("Backup Successful");
                     }
                     catch (Exception exception)

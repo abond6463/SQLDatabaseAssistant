@@ -5,7 +5,6 @@ D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDataba
 D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.csproj.GenerateResource.Cache
 D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.exe
 D:\VS Projects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.pdb
-E:\GitHub\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.csprojResolveAssemblyReference.cache
 E:\GitHub\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.Properties.Resources.resources
 E:\GitHub\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.csproj.GenerateResource.Cache
 E:\GitHub\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.csproj.CoreCompileInputs.cache
