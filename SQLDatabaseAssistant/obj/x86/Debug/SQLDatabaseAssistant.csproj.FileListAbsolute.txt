@@ -13,3 +13,12 @@ E:\GitHub\SQLDatabaseAssistant\SQLDatabaseAssistant\bin\Debug\SQLDatabaseAssista
 E:\GitHub\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.exe
 E:\GitHub\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.pdb
 E:\GitHub\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.frmMain.resources
+F:\GitProjects\SQLDatabaseAssistant\SQLDatabaseAssistant\bin\Debug\SQLDatabaseAssistant.exe
+F:\GitProjects\SQLDatabaseAssistant\SQLDatabaseAssistant\bin\Debug\SQLDatabaseAssistant.pdb
+F:\GitProjects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.csprojAssemblyReference.cache
+F:\GitProjects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.frmMain.resources
+F:\GitProjects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.Properties.Resources.resources
+F:\GitProjects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.csproj.GenerateResource.cache
+F:\GitProjects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.csproj.CoreCompileInputs.cache
+F:\GitProjects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.exe
+F:\GitProjects\SQLDatabaseAssistant\SQLDatabaseAssistant\obj\x86\Debug\SQLDatabaseAssistant.pdb
